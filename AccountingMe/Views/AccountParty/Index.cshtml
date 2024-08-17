@@ -1,0 +1,98 @@
+﻿@model IEnumerable<User>
+@{
+	ViewData["Title"] = "طرف حساب ها";
+	Layout = "_AccountPartyLayout";
+}
+
+
+<dialog id="my_modal_4" class="modal">
+	<div class="modal-box w-11/12 max-w-5xl">
+		<h3 class="text-lg font-bold">یکی رو اضافه کن</h3>
+		<div class="modal-action">
+			<form method="post">
+				<input type="type" name="name" value="" />
+				<button class="btn" type="submit">بفرست</button>
+				<button class="btn">ببند!</button>
+			</form>
+		</div>
+	</div>
+</dialog>
+
+
+<div class="overflow-x-auto">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>شماره</th>
+				<th>نام</th>
+				<th>ارباطاتی</th>
+				<th>آدرس</th>
+				<th>مدیریت</th>
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				int i = 1;
+				foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@i
+						</td>
+						<td>
+							<div class="flex items-center gap-3">
+								<div class="avatar">
+									<div class="mask mask-squircle h-12 w-12">
+										<img src="item.Image"
+											 alt="none" />
+									</div>
+								</div>
+								<div>
+									<div class="font-bold">@item.Name</div>
+									<div class="text-sm opacity-50">ID : @item.Id</div>
+								</div>
+							</div>
+						</td>
+						<td>
+							@item.Mobile
+							<br />
+							<span class="badge badge-ghost badge-sm">@item.Email</span>
+						</td>
+						<td>@item.Address</td>
+						<th>
+							<button class="btn btn-ghost btn-md">ویرایش</button>
+							<button class="btn btn-ghost btn-md text-red-600" class="btn" onclick="document.getElementById('my_modal_Delete_Person_@item.Id').showModal();">
+								حذف
+							</button>
+						</th>
+						<td></td>
+					</tr>
+					<dialog id="my_modal_Delete_Person_@item.Id" class="modal modal-bottom sm:modal-middle">
+						<div class="modal-box">
+							<h3 class="text-lg font-bold">Hello!</h3>
+							<p class="py-4">آیا از حذف @item.Name مطمئن هستید؟؟</p>
+							<div class="modal-action">
+								<form method="post">
+									<!-- if there is a button in form, it will close the modal -->
+									<button class="btn btn-error" asp-controller="Parties" asp-action="Delete" asp-route-id="@item.Id">حذفش کن بره عامو</button>
+									<button class="btn">ببند</button>
+								</form>
+							</div>
+						</div>
+					</dialog>
+					i++;
+				}
+			}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>شماره</th>
+				<th>نام</th>
+				<th>ارباطاتی</th>
+				<th>آدرس</th>
+				<th>مدیریت</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+
