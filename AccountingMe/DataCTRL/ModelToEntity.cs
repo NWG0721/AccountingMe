@@ -16,6 +16,10 @@ namespace AccountingMe.DataCTRL
 			{
 				uM.Email = "ندارد";
 			}
+			if (String.IsNullOrEmpty(uM.Mobile))
+			{
+				uM.Email = "09**-***-****";
+			}
 			if (String.IsNullOrEmpty(uM.Image))
 			{
 				uM.Image = "NoPicteredPerson.png";

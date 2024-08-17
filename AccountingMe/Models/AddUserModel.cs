@@ -10,18 +10,21 @@ namespace AccountingMe.Models
 		[Display(Name="نام")]
 		public string Name { get; set; }
 
-		[Required(AllowEmptyStrings = false, ErrorMessage = "شماره تلفن خالیه گلم")]
+		[Required(AllowEmptyStrings = true)]
 		[Display(Name = "شماره تلفن")]
 		public string Mobile { get; set; }
 
-		[Required(AllowEmptyStrings = false, ErrorMessage = "ایمیل خالیه گلم")]
+		[Required(AllowEmptyStrings = true)]
 		[Display(Name = "ایمیل")]
+		[RegularExpression("/^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/g",ErrorMessage ="ایمیلت درست نیست")]
 		public string Email { get; set; }
 
-		[Required(AllowEmptyStrings = false)]
+		[Required(AllowEmptyStrings = true)]
+		[Display(Name = "آدرس")]
 		public string Address { get; set; }
 
 		[Required(AllowEmptyStrings = true)]
+		[Display(Name = "عکس نمایه")]
 		public string Image { get; set; }
 	}
 }
